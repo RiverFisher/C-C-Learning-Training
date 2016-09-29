@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <iomanip>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::setprecision;
+using std::setw;
+
+static int add(int a, int b);
+
+int main() {
+    srand(time(0)); // генерация случайных чисел
+    // динамическое создание двумерного массива вещественных чисел на десять элементов
+    float **ptrarray = new float* [2]; // две строки в массиве
+    for (int count = 0; count < 2; count++)
+        ptrarray[count] = new float [5]; // и пять столбцов
+    // заполнение массива
+    for (int count_row = 0; count_row < 2; count_row++)
+        for (int count_column = 0; count_column < 5; count_column++)
+            ptrarray[count_row][count_column] = (rand() % 10 + 1) / float((rand() % 10 + 1)); //заполнение массива случайными числами с масштабированием от 1 до 10
+    // вывод массива
+    for (int count_row = 0; count_row < 2; count_row++)
+    {
+        for (int count_column = 0; count_column < 5; count_column++)
+            cout << setw(4) << setprecision(2) << ptrarray[count_row][count_column] << "   ";
+        cout << endl;
+    }
+    // удаление двумерного динамического массива
+    for (int count = 0; count < 2; count++)
+        delete []ptrarray[count];
+
+    std::cin.sync();
+//    system ("read -p \"Press any key to continue ...\" -n 1");
+//    system("pause");
+
+    return 0;
+}
