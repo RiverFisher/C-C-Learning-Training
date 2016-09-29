@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+
+static int add(int a, int b);
+
+int main() {
+    setlocale(LC_ALL, "Russian");   // Set locale to cyrillic
+
+    string birds[10] = {            // Array's initialization
+            "Ворона", "Стриж", "Цапля", "Кукушка", "Дятел", "Пеликан", "Воробей", "Фазан", "Сорока", "Синица"};
+
+    for (int i = 0; i < 10; i++) {  // There is ...
+        cout << birds[i] << endl;   // output of the array's items to the console terminal in the "FOR" cycle
+    }
+
+    return 0;
+}
