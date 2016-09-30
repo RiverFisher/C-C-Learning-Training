@@ -1,0 +1,30 @@
+#include <iostream>
+#include <ctime>
+#include <iomanip>
+
+using std::cout;
+using std::cin;
+using std::endl;
+
+static int add(int a, int b);
+
+int main() {
+    int ch, a;
+
+    cout <<  "Введите слово из скобок: " << endl;
+
+    do {
+        ch = getchar();
+        if (ch == '(') { a++; }
+        else {
+            if (ch == ')') {
+                if (--a < 0) { break; }
+            }
+        }
+    } while (ch != '\n');
+
+    if ( a == 0 ) { cout << "Правильное" << endl; }
+    else { cout << "Неправильное" << endl; }
+
+    return 0;
+}
