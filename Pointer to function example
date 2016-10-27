@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+void func_1(void);
+void func_2(void);
+void func_3(void);
+void func_4(void);
+void func_5(void);
+void func_6(void);
+
+void (* functions[])(void) = {
+    func_1, func_2, func_3, func_4, func_5, func_6
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+
+    for (int i = 0; i < sizeof(functions) / sizeof(functions[0]); i++) {
+        functions[i]();
+    }
+
+    return 0;
+}
+
+void func_1(void) {
+    cout << "Выполняется операция 1..." << endl;
+}
+
+void func_2(void) {
+    cout << "Выполняется операция 2..." << endl;
+}
+
+void func_3(void) {
+    cout << "Выполняется операция 3..." << endl;
+}
+
+void func_4(void) {
+    cout << "Выполняется операция 4..." << endl;
+}
+
+void func_5(void) {
+    cout << "Выполняется операция 5..." << endl;
+}
+
+void func_6(void) {
+    cout << "Выполняется операция 6..." << endl;
+}
