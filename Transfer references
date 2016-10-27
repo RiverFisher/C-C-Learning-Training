@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+void showVariables(int iVar, double dVar);
+
+void change(int iVar, double dVar);         // Передача параметров по значению
+void changeRef(int& iVar, double& dVar);    // Передача параметров по ссылке
+void changePtr(int* iVar, double* dVar);    // Передача параметров по указателю
+
+int main() {
+    setlocale(LC_ALL, "rus");
+
+    int iVariable = 0;
+    double dVariable = 0.0;
+
+    cout << "Передача параметров по значению: " << endl << "iVariable\t\tdVariable" << endl;
+    showVariables(iVariable, dVariable);
+    change(iVariable, dVariable);
+    showVariables(iVariable, dVariable);
+    cout << endl;
+
+    cout << "Передача параметров по ссылке: " << endl << "iVariable\t\tdVariable" << endl;
+    showVariables(iVariable, dVariable);
+    changeRef(iVariable, dVariable);        // Передаём, как обычную переменную
+    showVariables(iVariable, dVariable);
+    cout << endl;
+
+    cout << "Передача параметров по указателю: " << endl << "iVariable\t\tdVariable" << endl;
+    showVariables(iVariable, dVariable);
+    changePtr(&iVariable, &dVariable);      // Передаём, используя &, чтобы передать адрес
+    showVariables(iVariable, dVariable);
+    cout << endl;
+
+    return 0;
+}
+
+void showVariables(int iVar, double dVar) {
+    cout << iVar << "\t\t\t\t" << dVar << "\t\t\t\t" << endl;
+}
+
+/**
+ * Изменить параметры
+ *
+ * @param iVar
+ * @param dVar
+ */
+void change(int iVar, double dVar) {
+    iVar = 4242;
+    dVar = 4242.4242;
+}
+
+/**
+ * Изменить параметры, используя ссылки на них
+ *
+ * @param iVar
+ * @param dVar
+ */
+void changeRef(int& iVar, double& dVar) {
+    iVar = 42;     // Выполняем обращение, как к обычным переменным
+    dVar = 42.42;
+}
+
+/**
+ * Изменить параметры, используя их адреса на область памяти
+ *
+ * @param iVar
+ * @param dVar
+ */
+void changePtr(int* iVar, double* dVar) {
+    *iVar = 777;     // Разыменовываем переменные
+    *dVar = 777.777;
+}
