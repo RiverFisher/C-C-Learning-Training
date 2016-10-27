@@ -1,0 +1,53 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+const unsigned int DIMENSION1 = 3;
+const unsigned int DIMENSION2 = 5;
+const unsigned int DIMENSION3 = 8;
+
+int main() {
+
+    int ***arr;
+
+    int cnt = 1;
+
+    /**
+     * Создание трёхмерного динамического массива
+     */
+    arr = new int ** [DIMENSION1];
+    for (int i = 0; i < DIMENSION1; i++) {
+        arr[i] = new int * [DIMENSION2];
+        for (int j = 0; j < DIMENSION2; j++) {
+            arr[i][j] = new int [DIMENSION3];
+        }
+    }
+
+    /**
+     * Работа с трёхмерным динамическим массивом
+     */
+    for (int i = 0; i < DIMENSION1; i++) {
+        for (int j = 0; j < DIMENSION2; j++) {
+            for (int k = 0; k < DIMENSION3; k++) {
+                arr[i][j][k] = cnt++;
+                cout << setw(4) << arr[i][j][k];
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+
+    /**
+     * Уничтожение трёхмерного динамического массива
+     */
+    for (int i = 0; i < DIMENSION1; i++) {
+        for (int j = 0; j < DIMENSION2; j++) {
+            delete [] arr[i][j];
+        }
+        delete [] arr[i];
+    }
+    delete [] arr;
+
+    return 0;
+}
