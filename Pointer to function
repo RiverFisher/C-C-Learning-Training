@@ -1,0 +1,30 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+double circleArea(double radius);
+
+int main() {
+    setlocale(LC_ALL, "rus");
+
+    /**
+     *  Классический вариант вызова функции
+     */
+    double r = 1.0;
+    cout << "Круг радиуса " << r << " имеет площадь, равную ~" << circleArea(r) << endl;
+
+    /**
+     * Вариант вызова функции через указатель на неё
+     */
+    double (* pfunc)(double);   // Переменная-указатель на функцию
+    pfunc = circleArea;
+    cout << "Круг радиуса " << r << " имеет площадь, равную ~" << (* pfunc)(r) << endl;
+
+    return 0;
+}
+
+double circleArea(double radius) {
+    const double PI = 3.1415;
+    return PI * radius * radius;
+}
