@@ -1,0 +1,71 @@
+#include <iostream>
+
+using namespace std;
+
+/**
+ * Declaration of structures
+ */
+struct Node {
+    int data;
+    Node *p;
+};
+
+/**
+ * Declaration of functions
+ */
+Node *  primaryInitialization   (int data);
+void    push                    (Node **top, int data);
+int     pop                     (Node **top);
+
+/**
+ * Main function
+ */
+int main() {
+    Node *top = primaryInitialization(1);
+    for (int i = 2; i <= 6; i++) push(&top, i);
+    while (top) cout << pop(&top) << ' ';
+    return 0;
+}
+
+/**
+ * Primary initialization
+ * Первичная инициализация стека
+ *
+ * @param data
+ * @return
+ */
+Node * primaryInitialization(int data) {
+    Node *pV = new Node;
+    pV->data = data;
+    pV->p = 0;
+    return pV;
+}
+
+/**
+ * Push to the stack
+ * Занесение в стек
+ *
+ * @param top
+ * @param data
+ */
+void push(Node **top, int data) {
+    Node *pV = new Node;
+    pV->data = data;
+    pV->p = *top;
+    *top = pV;
+}
+
+/**
+ * Extraction from the stack
+ * Извлечение из стека
+ *
+ * @param top
+ * @return
+ */
+int pop(Node **top) {
+    int temp = (*top)->data;
+    Node *pV = *top;
+    *top = (*top)->p;
+    delete pV;
+    return temp;
+}
