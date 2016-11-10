@@ -14,7 +14,7 @@ struct Node {
 /**
  * Declaration of functions
  */
-Node *  initializationOfFirst   (int data);
+Node *  firstInitialization     (int data);
 void    addToEnd                (Node **pEnd, int data);
 Node *  findByKey               (Node * const pBegin, int data);
 bool    remove                  (Node **pBegin, Node **pEnd, int key);
@@ -26,7 +26,7 @@ Node *  insert                  (Node * const pBegin, Node **pEnd, int key, int 
  * @return
  */
 int main() {
-    Node *pBegin = initializationOfFirst(1);
+    Node *pBegin = firstInitialization(1);
 
     // Формирование первого элемента списка
     Node *pEnd = pBegin;
@@ -49,13 +49,13 @@ int main() {
 }
 
 /**
- * Initialization of the first element
- * Инициализация первого элемента
+ * Primary initialization
+ * Первичная инициализация
  *
  * @param data
  * @return
  */
-Node * initializationOfFirst(int data) {
+Node * firstInitialization(int data) {
     Node *pV = new Node;
     pV->data = data;
     pV->next = 0;
