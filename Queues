@@ -1,0 +1,70 @@
+#include <iostream>
+
+using namespace std;
+
+/**
+ * Declaration of structures
+ */
+struct Node {
+    int data;
+    Node *p;
+};
+
+/**
+ * Declaration of functions
+ */
+Node *  primaryInitialization   (int data);
+void    add                     (Node **pEnd, int data);
+int     propulsion              (Node **pBegin);
+
+/**
+ * Main function
+ */
+int main() {
+    Node *pBegin = primaryInitialization(1);
+    Node *pEnd = pBegin;
+    for (int i = 2; i <= 6; i++) add(&pEnd, i);
+    while (pBegin) cout << propulsion(&pBegin) << ' ';
+    return 0;
+}
+
+/**
+ * Primary initialization of the queue
+ * Первичная инициализация очереди
+ *
+ * @param data
+ * @return
+ */
+Node * primaryInitialization(int data){
+    Node *pV = new Node;
+    pV->data = data;
+    pV->p = 0;
+    return pV;
+}
+
+/**
+ * Addition of the element to the queue's end
+ * Добавление элемента в конец очереди
+ */
+void add(Node **pEnd, int data) {
+    Node *pV = new Node;
+    pV->data = data;
+    pV->p = 0;
+    (*pEnd)->p = pV;
+    *pEnd = pV;
+}
+
+/**
+ * Propulsion in the queue
+ * Продвижение в очереди
+ *
+ * @param pBegin
+ * @return
+ */
+int propulsion(Node **pBegin) {
+    int temp = (*pBegin)->data;
+    Node *pV = *pBegin;
+    *pBegin = (*pBegin)->p;
+    delete pV;
+    return temp;
+}
