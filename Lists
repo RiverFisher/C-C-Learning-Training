@@ -1,0 +1,160 @@
+#include <iostream>
+
+using namespace std;
+
+/**
+ * Declaration of structures
+ */
+struct Node {
+    int data;
+    Node *next;
+    Node *prev;
+};
+
+/**
+ * Declaration of functions
+ */
+Node *  initializationOfFirst   (int data);
+void    addToEnd                (Node **pEnd, int data);
+Node *  findByKey               (Node * const pBegin, int data);
+bool    remove                  (Node **pBegin, Node **pEnd, int key);
+Node *  insert                  (Node * const pBegin, Node **pEnd, int key, int data);
+
+/**
+ * Main function
+ *
+ * @return
+ */
+int main() {
+    Node *pBegin = initializationOfFirst(1);
+
+    // Формирование первого элемента списка
+    Node *pEnd = pBegin;
+    // Список заканчивается, едва начавшись
+
+    // Добавление в конец списка пяти элементов: 2, 3, 4, 5, 6
+    for (int i = 2; i <= 6; i++) addToEnd(&pEnd, i);
+
+    // Вставка элемента 42 после элемента 4
+    insert(pBegin, &pEnd, 4, 42);
+
+    // Удаление элемента 3
+    if (!remove(&pBegin, &pEnd, 3)) cout << "Элемент не найден" << endl;
+    Node *pV = pBegin;
+    while (pV) {
+        cout << pV->data << ' ';
+        pV = pV->next;
+    }
+    return 0;
+}
+
+/**
+ * Initialization of the first element
+ * Инициализация первого элемента
+ *
+ * @param data
+ * @return
+ */
+Node * initializationOfFirst(int data) {
+    Node *pV = new Node;
+    pV->data = data;
+    pV->next = 0;
+    pV->prev = 0;
+    return pV;
+}
+
+/**
+ * Addition of the element to the list's end
+ * Добавление элемента в конец списка
+ *
+ * @param pEnd
+ * @param data
+ */
+void addToEnd(Node **pEnd, int data) {
+    Node *pV = new Node;
+    pV->data = data;
+    pV->next = 0;
+    pV->prev = *pEnd;
+    (*pEnd)->next = pV;
+    *pEnd = pV;
+}
+
+/**
+ * Search by element's key
+ * Поиск элемента по ключу
+ *
+ * @param pBegin
+ * @param data
+ * @return
+ */
+Node * findByKey(Node * const pBegin, int data) {
+    Node *pV = pBegin;
+    while (pV) {
+        if (pV->data == data) break;
+        pV = pV->next;
+    }
+    return pV;
+}
+
+/**
+ * Deletion of the element
+ * Удаление элемента
+ *
+ * @param pBegin
+ * @param pEnd
+ * @param key
+ * @return
+ */
+bool remove(Node **pBegin, Node **pEnd, int key) {
+    if (Node *pKey = findByKey(*pBegin, key)) {     // 1
+        if (pKey == *pBegin) {                      // 2
+            *pBegin = (*pBegin)->next;
+            (*pBegin)->prev = 0;
+        }
+        else if (pKey == *pEnd) {                   // 3
+            *pEnd = (*pEnd)->prev;
+            (*pEnd)->next = 0 ;
+        }
+        else {                                      // 4
+            (pKey->prev)->next = pKey->next;
+            (pKey->next)->prev = pKey->prev;
+        }
+        delete pKey;
+        return true;                                // 5
+    }
+    return false;                                   // 6
+}
+
+/**
+ * Insertion of the element
+ * Вставка элемента
+ *
+ * @param pBegin
+ * @param pEnd
+ * @param key
+ * @param data
+ * @return
+ */
+Node * insert(Node * const pBegin, Node **pEnd, int key, int data) {
+    if (Node *pkey = findByKey(pBegin, key)) {
+        Node *pV = new Node;
+        pV->data = data;
+
+        // 1 - установление связи нового узла с последующим
+        pV->next = pkey->next;
+
+        // 2 - установление связи нового узла с предыдущим
+        pV->prev = pkey;
+
+        // 3 - установление связи предыдущего узла с новым
+        pkey->next = pV;
+
+        // 4 - установление связи последующего узла с новым
+        if (pkey != *pEnd) (pV->next)->prev = pV;
+
+        // Обновление указателя на конец списка, если узел вставляется в конец
+        else *pEnd = pV;
+        return pV;
+    }
+    return 0;
+}
