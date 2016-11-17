@@ -1,0 +1,131 @@
+#include <iostream>
+
+using namespace std;
+
+/**
+ * Для создания отступов
+ * Кол-во отступов высчитывается по кол-ву рекурсивного вхождения при выводе в фукцию print
+ */
+int tabs = 0;
+
+/**
+ * Структура ветки
+ */
+struct Branch {
+    /**
+     * Ключ
+     */
+    char Data;
+    /**
+     * Указатель на левую ветку
+     */
+    Branch *LeftBranch;
+    /**
+     * Указатель на правую ветку
+     */
+    Branch *RightBranch;
+};
+
+/**
+ * Добавление данных
+ *
+ * @param aData
+ * @param aBranch
+ */
+void Add(char aData, Branch *&aBranch) {
+    /**
+     * Если ветки не существует
+     */
+    if (!aBranch) {
+        /**
+         * Создаём ветку и определяем её поля
+         */
+        aBranch = new Branch;
+        aBranch->Data = aData;
+        aBranch->LeftBranch = 0;
+        aBranch->RightBranch = 0;
+        return;
+    }
+    /**
+     * Иначе сравниваем добавляемый ключ с ключом текущей ветки
+     */
+    else {
+        /**
+         * Если он меньше ключа в текущей ветке - добавляем влево
+         */
+        if (aBranch->Data > aData) {
+            Add(aData, aBranch->LeftBranch);
+        }
+        /**
+         * Иначе добавляем вправо
+         */
+        else {
+            Add(aData, aBranch->RightBranch);
+        };
+    }
+}
+
+/**
+ * Вывод дерева
+ *
+ * @param aBranch
+ */
+void print(Branch *aBranch) {
+    /**
+     * Если ветка не существует - выходим (выводить нечего)
+     */
+    if (!aBranch) return;
+    /**
+     * Иначе увеличиваем счётчик рекурсивных вызовов, который будет считать отступы для вывода
+     */
+    tabs++;
+
+    /**
+     * Вывод ветки и её подветок слева
+     */
+    print(aBranch->LeftBranch);
+
+    /**
+     * Вывод отступов
+     */
+    for (int i = 0; i < tabs; i++) cout << " ";
+
+    /**
+     * Вывод ключа ветки
+     */
+    cout << aBranch->Data << endl;
+
+    /**
+     * Вывод ветки и её подветок справа
+     */
+    print(aBranch->RightBranch);
+
+    /**
+     * Уменьшаем количество отступов
+     */
+    tabs--;
+    return;
+}
+
+void FreeTree(Branch *aBranch) {
+    if (!aBranch) return;
+    FreeTree(aBranch->LeftBranch);
+    FreeTree(aBranch->RightBranch);
+    delete aBranch;
+    return;
+}
+
+int main() {
+    Branch *Root = 0;
+    char s[] = "18452789";
+
+    for (int i = 0; s[i]; i++) {
+        Add(s[i], Root);
+    }
+
+    print(Root);
+    FreeTree(Root);
+
+    cin.get();
+    return 0;
+}
