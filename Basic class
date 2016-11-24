@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+class DebtCard {
+private:
+    int pinCode;
+
+public:
+    DebtCard(int pinCode) {
+        this->pinCode = pinCode;
+    }
+
+    int getPinCode() {
+        return this->pinCode;
+    }
+
+    void setPinCode(int pinCode) {
+        this->pinCode = pinCode;
+    }
+};
+
+int main () {
+    DebtCard newCard(1234);
+    cout << newCard.getPinCode() << endl;
+
+    newCard.setPinCode(8422);
+    cout << newCard.getPinCode() << endl;
+}
