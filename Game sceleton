@@ -1,0 +1,114 @@
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+/* Оружие */
+class Weapon {
+    enum WeaponType {Sword, Stick, Ax};
+
+public:
+    /* Fields */
+    WeaponType type;
+    int damage;
+
+    /* Constructor */
+    Weapon() {
+        int probability = this->getProbability();
+        if (probability < 34 || probability == 100) this->type = Sword;
+        else if (probability >= 34 && probability < 67) this->type = Stick;
+        else this->type = Ax;
+    }
+
+    /* Methods */
+    virtual void setConditional() {
+        this->damage *= 1;
+    }
+
+private:
+    /* Methods */
+    int getProbability() {
+        srand(time(NULL));
+        return rand() % 100 + 1;
+    }
+};
+
+/* Персонаж */
+class Character {
+private:
+    /* Fields */
+    int morale;         /* боевой дух */
+    int attack;         /* уровень атаки */
+    int protection;     /* уровень защиты */
+    Weapon *weapon;     /* оружие персонажа */
+
+    /* Methods */
+    int getProbability() {
+        srand(time(NULL));
+        return rand() % 100 + 1;
+    }
+
+    string generateRandomName() {
+        srand(time(NULL));
+        int nameProbability = rand() % 16;
+        string baseNames[16] = {"Alan", "Alfred", "Bill", "Bruce", "Charles", "Clifford", "Dylan", "Eric",
+                             "Francis", "Gilbert", "Jack", "Jordan", "Kyle", "Louis", "Miguel", "Steven"};
+        int numberProbability = rand() % 99 + 1;
+        return baseNames[nameProbability] + to_string(numberProbability);
+    }
+public:
+    string name;
+    int health;
+
+    /* Constructor */
+    Character(int morale) {
+        this->morale = morale;
+        this->weapon = new Weapon();
+
+        this->name = this->generateRandomName();
+    }
+
+    void setMorale(int morale) {
+        this->morale = morale;
+    }
+    int getMorale() {
+        return this->morale;
+    }
+
+    void setAttack(int attack) {
+        this->attack = attack;
+    }
+    int getAttack() {
+        return this->attack;
+    }
+
+    void setProtection(int protection) {
+        this->protection = protection;
+    }
+    int getProtection() {
+        return this->protection;
+    }
+
+    void setWeapon(Weapon *weapon) {
+        this->weapon = weapon;
+    }
+    Weapon getWeapon() {
+        return *(this->weapon);
+    }
+
+    void showCharacter() {
+        cout << 'Morale: '      << this->getMorale()        << endl;
+        cout << 'Attack: '      << this->getAttack()        << endl;
+        cout << 'Protection: '  << this->getProtection()    << endl;
+        cout << 'Weapon: '      << this->getWeapon().type   << endl;
+    }
+};
+
+int main () {
+    Character myCharacter(100);
+    myCharacter.showCharacter();
+}
+
+std::ostream& operator << (std::ostream &os, Character &object) {
+    return os << object.name;
+}
