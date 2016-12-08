@@ -9,7 +9,7 @@ Product::Product() : price(0.0), weight(0.0) {
 }
 
 Product::~Product() {
-    std::cout << "Товар удалён" << std::endl;
+    std::cout << "Товар обслужен" << std::endl;
 }
 
 void Product::setName(const char *name) {
