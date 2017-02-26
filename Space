@@ -1,0 +1,118 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+class Space {
+    // Все члены класса – закрытые
+    int n; // Количество точек
+    int k; // Размерность пространства
+    double **a; // Матрица, которая будет хранить координаты точек
+    double min; // Минимальное расстояние между точками в k-мерном пространстве
+    double max; // Максимальное расстояние между точками в k-мерном пространстве
+    int imin; // Точки, расстояние между которыми минимально
+    int jmin;
+    int imax; // Точки, расстояние между которыми максимально
+    int jmax;
+
+public:
+    // Открытые методы класса
+    Space();
+    void searchMin();
+    void searchMax();
+    void outputResult();
+    void freeMemory();
+};
+
+Space::Space() {
+    int i, j;
+    cout << "Enter the dimension of the space: ";
+    cin >> k;
+    cout << "Enter the number of points: ";
+    cin >> n;
+    a = new double * [k];
+    for (i = 0; i < k; i++)
+        a[i] = new double[n];
+    for (j = 0; j < n; j++) {
+        cout << "Enter the coordinate of the " << j << " point: " << endl;
+        for (i = 0; i < k; i++) {
+            cin >> a[i][j];
+        }
+    }
+}
+
+void Space::searchMax() {
+    int i, j, l;
+    double s;
+    for (max = 0, l = 0; l < k; l++) {
+        max += (a[l][0] - a[l][1]) * (a[l][0] - a[l][1]);
+    }
+    max = pow(max, 0.5);
+    imax = 0;
+    jmax = 1;
+    for (i = 0; i < n; i++) {
+        for (j = i + 1; j < n; j++) {
+            for (s = 0, l = 0; l < k; l++)
+                s += (a[l][i] - a[l][j]) * (a[l][i] - a[l][j]);
+            s = pow(s, 0.5);
+            if (s > max) {
+                max = s;
+                imax = i;
+                jmax = j;
+            }
+        }
+    }
+}
+
+void Space::searchMin() {
+    int i, j, l;
+    double s;
+
+    for (min = 0, l = 0; l < k; l++) {
+        min += (a[l][0] - a[l][1]) * (a[l][0] - a[l][1]);
+    }
+    min = pow(min, 0.5);
+    imin = 0; jmin = 1;
+
+    for (i = 0; i < k; i++) {
+        for (j = i + 1; j < n; j++) {
+            for (s = 0, l = 0; l < k; l++)
+                s += (a[l][i] - a[l][j]) * (a[l][i] - a[l][j]);
+            s = pow(s, 0.5);
+            if (s < min) {
+                min = s;
+                imin = i;
+                jmin = j;
+            }
+        }
+    }
+}
+
+void Space::outputResult() {
+    int i, j;
+    for (i = 0; i < k; cout << endl, i++) {
+        for (j = 0; j < n; j++) {
+            cout << a[i][j] << "\t";
+        }
+    }
+    cout << "Max distance is " << max << "\t of points: " << imax << "\t" << jmax << endl;
+    cout << "Min distance is " << min << "\t of points: " << imin << "\t" << jmin << endl;
+}
+
+void Space::freeMemory() {
+    delete [] a;
+}
+
+int main() {
+    Space x; // Описание переменной - экземпляра класса Space
+    // Вызов метода searchMax для поиска максимального расстояния между точками в k-мерном пространстве
+    x.searchMax();
+    // Вызов метода searchMin для поиска минимального расстояния между точками в k-мерном пространстве
+    x.searchMin();
+    // Вызов метода outputResult для вывода результатов
+    x.outputResult();
+    // Вызов функции freeMemory
+    x.freeMemory();
+
+    return 0;
+}
