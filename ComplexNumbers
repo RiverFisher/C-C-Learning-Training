@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+class Complex { // Определяем класс complex
+public:
+    //Прототип конструктора класса.
+    Complex();
+
+    void input();
+    Complex add(Complex a);
+    void show();
+
+private:
+    double x; // Действительная часть комплексного числа
+    double y; // Мнимая часть комплексного числа
+};
+
+Complex::Complex() {
+    cout << "Enter x: " << endl; cin >> x;
+    cout << "Enter y: " << endl; cin >> y;
+}
+
+// Описание открытого метода input класса complex
+void Complex::input() {
+    cout << "Enter x: " << endl; cin >> x; // неявное использование указателя this
+    cout << "Enter y: " << endl; cin >> y; // явное использование указателя this
+}
+
+Complex Complex::add(Complex a) {
+    Complex res;
+    res.x = x + a.x; // неявное использование указателя this
+    res.y = y + a.y; // неявное использование указателя this
+
+    return res; // неявное использование указателя this
+}
+
+// Описание закрытого метода show класса complex
+void Complex::show() {
+    if (y >= 0) cout << x << "+" << y << "i" << endl; // неявное использование указателя this
+    else cout << x << y << "i" << endl; // неявное использование указателя this
+}
+
+int main() {
+    Complex number1, number2;
+    number1.input(); number2.input();
+    Complex result = number1.add(number2);
+    result.show();
+    return 0;
+}
