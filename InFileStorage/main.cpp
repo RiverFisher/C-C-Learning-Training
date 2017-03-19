@@ -37,7 +37,7 @@ public:
  */
 class Emulation {
 public:
-    Lineup* createArmy(CarFactory& factory ) {
+    Lineup* createLineup(CarFactory& factory ) {
         Lineup *lineupPointer = new Lineup;
         lineupPointer->vectorCrossover.push_back(factory.createCrossover());
         lineupPointer->vectorSUV.push_back(factory.createSUV());
