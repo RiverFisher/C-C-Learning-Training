@@ -51,8 +51,8 @@ int main() {
     JeepFactory         factoryOfJeep;
     MitsubishiFactory   factoryOfMitsubishi;
 
-    Lineup * lineupOfJeep = emulation.createArmy(factoryOfJeep);
-    Lineup * lineupOfMitsubishi = emulation.createArmy(factoryOfMitsubishi);
+    Lineup * lineupOfJeep = emulation.createLineup(factoryOfJeep);
+    Lineup * lineupOfMitsubishi = emulation.createLineup(factoryOfMitsubishi);
 
     cout << "Lineup of Jeep is:" << endl;
     lineupOfJeep->info();
