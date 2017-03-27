@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/InFileStorage.dir/main.cpp.o  -o InFileStorage 
