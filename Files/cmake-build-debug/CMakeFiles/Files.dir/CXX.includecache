@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wizard/CLionProjects/Files/FileManagement/LogManager.h
+string
+-
+
+/home/wizard/CLionProjects/Files/main.cpp
+iostream
+-
+vector
+-
+string
+-
+FileManagement/LogManager.h
+/home/wizard/CLionProjects/Files/FileManagement/LogManager.h
+
