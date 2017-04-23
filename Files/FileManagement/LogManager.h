@@ -2,19 +2,18 @@
 #define INFILESTORAGE_LOGMANAGER_H
 
 
-#include <string>
-
-
 class LogManager {
 public:
-    static LogManager& getInstance();
+    static LogManager& instance();
+    void print(std::string);
     void writeToFile(std::string);
+
+protected:
+    static LogManager Instance;
+
 private:
-    LogManager() { }
-    LogManager( LogManager const& ) = delete;
-    ~LogManager() { }
-    LogManager& operator=( LogManager const& ) = delete;
-//    static LogManager* p_instance;
+    LogManager();
+    ~LogManager();
 };
 
 

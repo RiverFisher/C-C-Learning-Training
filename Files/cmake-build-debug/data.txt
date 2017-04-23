@@ -1,0 +1,20 @@
+Price of the Toy is $1.100000.
+Price of the Toy is $0.880000.
+Price of the Toy is $1.540000.
+Price of the Toy is $2.320000.
+Price of the Toy is $0.980000.
+Price of the Toy is $1.410000.
+Price of the Toy is $1.040000.
+Price of the Toy is $1.000000.
+Price of the Toy is $1.100000.
+Price of the Toy is $0.150000.
+Price of the Ice cream is $0.600000.
+Price of the Ice cream is $0.780000.
+Price of the Ice cream is $0.540000.
+Price of the Ice cream is $0.320000.
+Price of the Ice cream is $0.900000.
+Price of the Ice cream is $0.840000.
+Price of the Ice cream is $0.560000.
+Price of the Ice cream is $0.470000.
+Price of the Ice cream is $0.740000.
+Price of the Ice cream is $0.620000.

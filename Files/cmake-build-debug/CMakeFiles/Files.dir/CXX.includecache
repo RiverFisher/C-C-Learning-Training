@@ -6,17 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/wizard/CLionProjects/Files/FileManagement/LogManager.h
-string
--
-
 /home/wizard/CLionProjects/Files/main.cpp
 iostream
 -
+fstream
+-
 vector
 -
-string
--
-FileManagement/LogManager.h
-/home/wizard/CLionProjects/Files/FileManagement/LogManager.h
 

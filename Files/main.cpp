@@ -1,7 +1,6 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <string>
-#include "FileManagement/LogManager.h"
 
 using namespace std;
 
@@ -12,8 +11,14 @@ public:
 
     void writeToFile() {
         string message = "Price of the " + getName() + " is " + getPrice() + ".\n";
-        LogManager& logManager = LogManager::getInstance();
-        logManager.writeToFile(message);
+
+        ofstream f;//("data.txt", ios_base::app | ios_base::trunc);
+        f.open("data.txt", ios::app);
+        if (!f.is_open()) {
+            cout << "Файл не может быть открыт или создан\n";
+        }
+        f << message;
+        f.close();
     }
 
     virtual string getName() = 0;
