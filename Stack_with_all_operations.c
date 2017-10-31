@@ -7,7 +7,7 @@ int MAXSIZE = 8;
 int stack[8];
 int top = -1;
 
-int isempty() {
+int isEmpty() {
 
     if(top == -1)
         return 1;
@@ -15,7 +15,7 @@ int isempty() {
         return 0;
 }
 
-int isfull() {
+int isFull() {
 
     if(top == MAXSIZE)
         return 1;
@@ -41,7 +41,7 @@ int pop() {
 
 int push(int data) {
 
-    if(!isfull()) {
+    if(!isFull()) {
         top = top + 1;
         stack[top] = data;
     } else {
@@ -62,13 +62,13 @@ int main() {
     cout << "Elements: " << endl;
 
     // print stack data
-    while(!isempty()) {
+    while(!isEmpty()) {
         int data = pop();
         cout << data << endl;
     }
 
-    cout << "Stack full: " << (isfull() ? "true" : "false") << endl;
-    cout << "Stack empty: " << (isempty() ? "true" : "false") << endl;
+    cout << "Stack full: " << (isFull() ? "true" : "false") << endl;
+    cout << "Stack empty: " << (isEmpty() ? "true" : "false") << endl;
 
     return 0;
 }
