@@ -30,7 +30,7 @@ int peek() {
 int pop() {
     int data;
 
-    if(!isempty()) {
+    if(!isEmpty()) {
         data = stack[top];
         top = top - 1;
         return data;
