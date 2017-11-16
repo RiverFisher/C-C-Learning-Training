@@ -13,8 +13,8 @@ int main() {
     Node *tree = NULL;
 
     srand(time(NULL));
-    for (int i = 0; i < 15; i++) {
-        addNode(rand() % 15, tree);
+    for (int i = 0; i < 42; i++) {
+        addNode(rand() % 42, tree);
     }
     showTree(tree);
     removeTree(tree);
