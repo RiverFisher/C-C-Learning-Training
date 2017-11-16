@@ -24,11 +24,11 @@ int main() {
     return 0;
 }
 
-void showTree(Node *&tree) {
-    if (tree != NULL) {
-        showTree(tree->left);
-        std::cout << tree->data << ' ';
-        showTree(tree->right);
+void showTree(Node *&node) {
+    if (node != NULL) {
+        showTree(node->left);
+        std::cout << node->data << ' ';
+        showTree(node->right);
     }
 }
 
@@ -62,10 +62,10 @@ void addNode(int data, Node *&node) {
     }
 }
 
-void removeTree(Node *&tree){
-    if (tree != NULL) {
-        removeTree(tree->left);
-        removeTree(tree->right);
-        delete tree;
+void removeTree(Node *&node){
+    if (node != NULL) {
+        removeTree(node->left);
+        removeTree(node->right);
+        delete node;
     }
 }
